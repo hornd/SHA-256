@@ -19,24 +19,24 @@
 #include <stdio.h>
 #include "sha_256.h"
  
-#define SHIFT_RIGHT(x, y)           ((x) >> (y))
-#define SHIFT_LEFT(x, y)            ((x) << (y))
+#define SHIFT_RIGHT(x, y)               ((x) >> (y))
+#define SHIFT_LEFT(x, y)                ((x) << (y))
 // Circular shift 
-#define ROTATE_RIGHT(x, y)          (SHIFT_RIGHT(x,y) | ((x) << (32 - (y))))
+#define ROTATE_RIGHT(x, y)              (SHIFT_RIGHT(x,y) | ((x) << (32 - (y))))
 
-#define U8_TO_U32(e)                (SHIFT_LEFT(*e, 24) |      \
-				     SHIFT_LEFT(*(e+1), 16) |  \
-				     SHIFT_LEFT(*(e+2), 8)  |  \
-				     (*(e+3)))
+#define U8_TO_U32(e)                    (SHIFT_LEFT(*e, 24) |      \
+				         SHIFT_LEFT(*(e+1), 16) |  \
+				         SHIFT_LEFT(*(e+2), 8)  |  \
+				         (*(e+3)))
 
 //Defend against if(a) macro;.
-#define U32_TO_U8(n,b,i)        	do { \
+#define U32_TO_U8(n,b,i)                do {                                   \
 					    *(b+i) = (U8)SHIFT_RIGHT(n, 24);   \
 					    *(b+i+1) = (U8)SHIFT_RIGHT(n, 16); \
 					    *(b+i+2) = (U8)SHIFT_RIGHT(n, 8);  \
-					    *(b+i+3) = (U8)(n);                \
+					    *(b+i+3) = (U8)(n);		\
                                         } while(0)
-	
+	  
 
 #define SIGMA0(e) 		 	(ROTATE_RIGHT(e, 2) ^  \
 					 ROTATE_RIGHT(e, 13) ^ \
@@ -55,12 +55,12 @@
 					 values[(125-(n))%8], values[(126-(n))%8]) + k_vals[n] + W[(n)]
 								
 //Defend against if(a) macro;.
-#define SHA256_GOROUND(n) 			do {                                                            \
-						t = SHA256_CALCTEMP(n);                                         \
-						values[(123-n)%8] += t;                                         \
-						values[(127-n)%8] = t + SIGMA0(values[(120-n)%8]) +             \
-                                                MA(values[(120-n)%8],values[(121-n)%8],values[(122-n)%8]);	\
-						}while(0)
+#define SHA256_GOROUND(n) 		do {                                                            \
+					    t = SHA256_CALCTEMP(n);                                         \
+					    values[(123-n)%8] += t;                                         \
+					    values[(127-n)%8] = t + SIGMA0(values[(120-n)%8]) +             \
+                                            MA(values[(120-n)%8],values[(121-n)%8],values[(122-n)%8]);	\
+					} while(0)
 						
 						
 // This string is used to index into to convert to a hex string.
