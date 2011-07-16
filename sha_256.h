@@ -28,8 +28,8 @@ typedef uint64_t      U64;
 
 typedef struct
 {
-	U64 bits;
-	U32 holdlength;
+    U64 bits;
+    U32 holdlength;
     U32 state[8];
     U8 buffer[SHA_256_BLOCKSIZE];
 } sha256_context;
