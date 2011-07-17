@@ -52,7 +52,7 @@
 					 SHIFT_RIGHT(e, 10))
 //TODO: Cleanup these macros.									
 #define SHA256_CALCTEMP(n) 		values[(127-(n))%8] + SIGMA1(values[(124-(n))%8]) + CH(values[(124-(n))%8], \
-					 values[(125-(n))%8], values[(126-(n))%8]) + k_vals[n] + W[(n)]
+					 values[(125-(n))%8], values[(126-(n))%8]) + sha256_kvals[n] + W[(n)]
 								
 //Defend against if(a) macro;.
 #define SHA256_GOROUND(n) 		do {                                                            \
@@ -67,7 +67,7 @@
 static const char *hex_digits = "0123456789abcdef";
 
 #define NUM_K_VALUES 64
-static const U32 k_vals[NUM_K_VALUES] = { 
+static const U32 sha256_kvals[NUM_K_VALUES] = { 
                                 0x428a2f98UL, 0x71374491UL, 0xb5c0fbcfUL, 0xe9b5dba5UL, 0x3956c25bUL, 0x59f111f1UL, 0x923f82a4UL, 0xab1c5ed5UL,
 				0xd807aa98UL, 0x12835b01UL, 0x243185beUL, 0x550c7dc3UL, 0x72be5d74UL, 0x80deb1feUL, 0x9bdc06a7UL, 0xc19bf174UL,
 				0xe49b69c1UL, 0xefbe4786UL, 0x0fc19dc6UL, 0x240ca1ccUL, 0x2de92c6fUL, 0x4a7484aaUL, 0x5cb0a9dcUL, 0x76f988daUL,
