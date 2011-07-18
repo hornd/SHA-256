@@ -1,1 +1,3 @@
-To do.
+An fast SHA256 implementation.
+
+There are no guarantees that this software correctly generates hashes, although it does correctly compute all NIST test vectors.
